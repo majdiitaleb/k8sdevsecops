@@ -19,5 +19,12 @@ pipeline {
                     }
                    }
                 }
+       stage('Docker build and push') {
+            steps {
+              sh "printenv"
+              sh 'docker build -t majditaleb/numeric_app: ""$GIT_COMMIT"". '
+              sh 'docker push  majditaleb/numeric_app: ""$GIT_COMMIT""'
+            }
+        }
     }
 }
