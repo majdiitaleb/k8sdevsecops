@@ -32,7 +32,7 @@ pipeline {
             steps {
             withKubeConfig([credentialsId: "kubeconfig"]) {
               sh "sed -i 's#replace#majditaleb/numeric-app:${GIT_COMMIT}#' k8s_deployment_service.yaml"
-              sh "k ubectl apply -f k8s_deployment_service.yaml"
+              sh "kubectl apply -f k8s_deployment_service.yaml"
               }
             }
         }
