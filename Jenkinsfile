@@ -21,9 +21,7 @@ pipeline {
                 }
                  stage('Mutation tests') {
                                     steps {
-
                                       sh "mvn org.pitest:pitest-maven:mutationCoverage"
-
                                     }
                                     post{
                                       always{
