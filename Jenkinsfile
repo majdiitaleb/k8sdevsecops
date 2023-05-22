@@ -30,16 +30,20 @@ pipeline {
                                     }
                                 }
               stage('sonarqube analysis') {
+
                          steps {
-                           sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numerci-application    -Dsonar.host.url=http://devsecops-demo-k8s.eastus.cloudapp.azure.com:9000   -Dsonar.token=sqp_fcb8535df4f9be414ec99f322b43094e9aafecce"
+                          withCredentials([string(credentialsId: "SONAR_TOKEN"){
+                                                     sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numerci-application    -Dsonar.host.url=http://devsecops-demo-k8s.eastus.cloudapp.azure.com:9000  "
+
+                                        }
                          }
                      }
        stage('Docker build and push') {
             steps {
             withDockerRegistry(credentialsId: "docker-hub", url: "") {
               sh 'printenv'
-              sh 'docker build -t majditaleb1/numeric-app:""$GIT_COMMIT"" .'
-              sh 'docker push  majditaleb1/numeric-app:""$GIT_COMMIT""'
+              sh 'docker build -t majditaleb/numeric-app:""$GIT_COMMIT"" .'
+              sh 'docker push  majditaleb/numeric-app:""$GIT_COMMIT""'
               }
             }
         }
