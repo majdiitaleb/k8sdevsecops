@@ -34,7 +34,7 @@ pipeline {
                            withSonarQubeEnv('SonarQube') {
                            sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numerci-application    -Dsonar.host.url=http://devsecops-demo-k8s.eastus.cloudapp.azure.com:9000   -Dsonar.token=sqp_fcb8535df4f9be414ec99f322b43094e9aafecce"
                          }
-                         timeout(tome: 2, unit: 'MINUTES'){
+                         timeout(time: 2, unit: 'MINUTES'){
                           scritp {
                             waitForQualityGate abortPipeline: true
                           }
