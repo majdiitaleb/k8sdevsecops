@@ -38,15 +38,15 @@ pipeline {
             steps {
             withDockerRegistry(credentialsId: "docker-hub", url: "") {
               sh 'printenv'
-              sh 'docker build -t majditaleb/numeric-app:""$GIT_COMMIT"" .'
-              sh 'docker push  majditaleb/numeric-app:""$GIT_COMMIT""'
+              sh 'docker build -t majditaleb1/numeric-app:""$GIT_COMMIT"" .'
+              sh 'docker push  majditaleb1/numeric-app:""$GIT_COMMIT""'
               }
             }
         }
          stage('Kubernete deploiement -dev') {
             steps {
             withKubeConfig([credentialsId: "kubeconfig"]) {
-              sh "sed -i 's#replace#majditaleb/numeric-app:${GIT_COMMIT}#' k8s_deployment_service.yaml"
+              sh "sed -i 's#replace#majditaleb1/numeric-app:${GIT_COMMIT}#' k8s_deployment_service.yaml"
               sh "kubectl apply -f k8s_deployment_service.yaml"
               }
             }
