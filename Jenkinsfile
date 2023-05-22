@@ -32,8 +32,8 @@ pipeline {
               stage('sonarqube analysis') {
 
                          steps {
-                          withCredentials([string(credentialsId: "SONAR_TOKEN"){
-                                                     sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numerci-application    -Dsonar.host.url=http://devsecops-demo-k8s.eastus.cloudapp.azure.com:9000  "
+                          withCredentials([string(credentialsId: "SONAR_TOKEN")]){
+                      sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numerci-application    -Dsonar.host.url=http://devsecops-demo-k8s.eastus.cloudapp.azure.com:9000  "
 
                                         }
                          }
