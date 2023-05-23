@@ -85,7 +85,7 @@
 					</outputFormats>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 
