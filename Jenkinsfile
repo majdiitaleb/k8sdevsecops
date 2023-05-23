@@ -9,48 +9,34 @@ pipeline {
             }
         }
       stage('Units tests') {
-                    steps {
-                      sh "mvn test"
-                    }
-                   post {
-                    always {
-                      junit 'target/surefire-reports/*.xml'
-                      jacoco execPattern: 'target/jacoco.exec'
-                    }
-                   }
+        steps {
+             sh "mvn test"
+        }
+      }
+      stage('Mutation tests') {
+         steps {
+                sh "mvn org.pitest:pitest-maven:mutationCoverage"
+         }
+
+      }
+       stage('sonarqube analysis') {
+          steps {
+               withSonarQubeEnv('SonarQube') {
+                  sh "mvn  sonar:sonar -Dsonar.projectKey=numerci-application  -Dsonar.host.url=http://devsecops-demo-k8s.eastus.cloudapp.azure.com:9000 "
+               }
+                timeout(time: 2, unit: 'MINUTES'){
+                  script {
+                         waitForQualityGate abortPipeline: true
+                  }
                 }
-                 stage('Mutation tests') {
-                                    steps {
-                                      sh "mvn org.pitest:pitest-maven:mutationCoverage"
-                                    }
-                                   post {
-                                      always  {
-                                        pitmutation  mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
-                                      }
-                                    }
-                                }
-              stage('sonarqube analysis') {
-                         steps {
-                           withSonarQubeEnv('SonarQube') {
-                           sh "mvn  sonar:sonar -Dsonar.projectKey=numerci-application  -Dsonar.host.url=http://devsecops-demo-k8s.eastus.cloudapp.azure.com:9000 "
-                         }
-                         timeout(time: 2, unit: 'MINUTES'){
-                          script {
-                            waitForQualityGate abortPipeline: true
-                          }
-                         }
-                     }
+          }
+       }
+      stage('Dependency Maven Check') {
+            steps {
+                        sh "mvn dependency-check:check"
+                           }
+
               }
-                stage('Dependency Maven Check') {
-                                                  steps {
-                                                    sh "mvn dependency-check:check"
-                                                  }
-                                                 post {
-                                                    always  {
-                                                      dependencyCheckPublisher   pattern: 'target/dependency-check-report.xml'
-                                                    }
-                                                  }
-                                              }
        stage('Docker build and push') {
             steps {
             withDockerRegistry(credentialsId: "docker-hub", url: "") {
@@ -70,4 +56,13 @@ pipeline {
         }
 
     }
+    post {
+
+    always  {
+         junit 'target/surefire-reports/*.xml'
+         jacoco execPattern: 'target/jacoco.exec'
+         pitmutation  mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
+         dependencyCheckPublisher   pattern: 'target/dependency-check-report.xml'
+          }
+       }
 }
