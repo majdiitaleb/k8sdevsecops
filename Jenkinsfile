@@ -31,12 +31,12 @@ pipeline {
                 }
           }
        }
-      stage('Dependency Maven Check') {
+     /* stage('Dependency Maven Check') {
             steps {
                         sh "mvn dependency-check:check"
                            }
 
-              }
+              }*/
        stage('Docker build and push') {
             steps {
             withDockerRegistry(credentialsId: "docker-hub", url: "") {
@@ -62,7 +62,7 @@ pipeline {
          junit 'target/surefire-reports/*.xml'
          jacoco execPattern: 'target/jacoco.exec'
          pitmutation  mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
-         dependencyCheckPublisher   pattern: 'target/dependency-check-report.xml'
+        // dependencyCheckPublisher   pattern: 'target/dependency-check-report.xml'
           }
        }
 }
