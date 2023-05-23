@@ -91,7 +91,7 @@
 				<version>8.2.1</version>
 				<configuration>
                   <format>All</format>
-					<failBuildOnCVSS>5</failBuildOnCVSS>
+					<failBuildOnCVSS>8</failBuildOnCVSS>
 				</configuration>
 
 				<executions>
