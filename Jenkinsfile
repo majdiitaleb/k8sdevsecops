@@ -22,7 +22,7 @@ pipeline {
        stage('sonarqube analysis') {
           steps {
                withSonarQubeEnv('SonarQube') {
-                  sh "mvn  sonar:sonar -Dsonar.projectKey=${env.SONAR_APP} -Dsonar.host.url=${env.SONAR_HOST} "
+                  sh "mvn  sonar:sonar -Dsonar.projectKey=numerci-application  -Dsonar.host.url=${env.SONAR_HOST} "
                }
                 timeout(time: 2, unit: 'MINUTES'){
                   script {
