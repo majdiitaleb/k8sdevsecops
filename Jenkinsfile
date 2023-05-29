@@ -31,12 +31,18 @@ pipeline {
                 }
           }
        }
-     /* stage('Dependency Maven Check') {
+      stage('Vulnerability scan -docker') {
             steps {
-                        sh "mvn dependency-check:check"
-                           }
+            parallel(
+            "dependency scan"): {
+            sh "mvn dependency-check:check"
+            },
+            "Trivy scan":{
+                sh "bash trivy-docker-image-scan.sh"
+            }
+    }
 
-              }*/
+              }
        stage('Docker build and push') {
             steps {
             withDockerRegistry(credentialsId: "docker-hub", url: "") {
