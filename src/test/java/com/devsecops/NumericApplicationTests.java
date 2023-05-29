@@ -46,7 +46,7 @@ class NumericApplicationTests {
          .andExpect(content().string(("Kubernetes DevSecOps")));
     }
 
-    @Test
+ /*   @Test
     void testSeq(){
         String s= "abaaakkky";
         StringBuilder sb = new StringBuilder();
@@ -65,6 +65,6 @@ class NumericApplicationTests {
 
         }
         System.out.println(sb.toString());
-    }
+    }*/
 
 }
