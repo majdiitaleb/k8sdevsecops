@@ -62,7 +62,7 @@ pipeline {
               }
             }
         }
-}
+
     post {
 
     always  {
@@ -72,3 +72,4 @@ pipeline {
         // dependencyCheckPublisher   pattern: 'target/dependency-check-report.xml'
           }
        }
+  }
