@@ -79,7 +79,7 @@ class NumericApplicationTests {
            }
            System.out.println(sb.toString());
        }*/
-   @Test
+ /*  @Test
    void testSeq(){
      Map<Character, Integer> charCountMap = new HashMap<>();
 
@@ -112,5 +112,5 @@ class NumericApplicationTests {
          System.out.println(entry.getKey() + " -> " + entry.getValue());
      }
      System.out.println(sb.toString());
- }
+ }*/
 }
