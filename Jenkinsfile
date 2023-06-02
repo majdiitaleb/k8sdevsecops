@@ -76,7 +76,7 @@ pipeline {
          stage('Kubernete deploiement -dev') {
             steps {
             withKubeConfig([credentialsId: "kubeconfig"]) {
-              sh "sed -i 's#replace#majditaleb1/numeric-app:${GIT_COMMIT}#' k8s_deployment_service.yaml"
+              sh "sed -i 's#replace#majditaleb/numeric-app:${GIT_COMMIT}#' k8s_deployment_service.yaml"
               sh "kubectl apply -f k8s_deployment_service.yaml"
               }
             }
