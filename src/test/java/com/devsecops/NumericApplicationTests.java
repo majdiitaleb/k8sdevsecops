@@ -7,6 +7,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -37,5 +44,28 @@ class NumericApplicationTests {
          this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
          .andExpect(content().string(("Kubernetes DevSecOps")));
     }
+
+    @Test
+    void test(){
+        List<Integer> list= new ArrayList<Integer>();
+        for(int i=1; i<10; i++){
+            list.add(i);
+        }
+        Stream<Integer> streamList=list.stream();
+        streamList.filter(i -> i%2 ==0).forEach(System.out::println);
+        //System.out.println(liststream);
+
+        List<String> memberNames = new ArrayList<>();
+        memberNames.add("Amitabh");
+        memberNames.add("Shekhar");
+        memberNames.add("Aman");
+        memberNames.add("Rahul");
+        memberNames.add("Shahrukh");
+        memberNames.add("Salman");
+        memberNames.add("Yana");
+        memberNames.add("Lokesh");
+        memberNames.stream().filter(name->name.startsWith("A")).map(String::toUpperCase).forEach(System.out::println);
+    }
+
 
 }
