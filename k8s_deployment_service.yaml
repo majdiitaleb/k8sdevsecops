@@ -23,7 +23,7 @@ spec:
       - image: replace
         name: devsecops-container
         volumeMounts:
-        - mountPath: /temp
+        - mountPath: /tmp
           name: vol
         securityContext:
           runAsNonRoot: true
