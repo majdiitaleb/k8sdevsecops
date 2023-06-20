@@ -67,11 +67,8 @@ pipeline {
         }
           stage('Vulnerability Scan - Kubernetes') {
               steps {
-           // sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
-              parallel(
-                "OPA Scan": {
-                    sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
-                },
+            sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
+
 
               //  "Trivy Scan": {
                 //   sh "bash trivy-k8s-scan.sh"
