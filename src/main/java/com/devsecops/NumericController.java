@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+
 @RestController
 public class NumericController {
 
@@ -27,6 +28,8 @@ public class NumericController {
 		@GetMapping("/compare/{value}")
 		public String compareToFifty(@PathVariable int value) {
 			String message = "Could not determine comparison";
+
+
 			if (value > 50) {
 				message = "Greater than 50";
 			} else {
