@@ -16,7 +16,7 @@ spec:
         app: devsecops
     spec:
       volumes:
-        - name: vol
+        - name: logVolume
           emptyDir: {}
       serviceAccountName: default
       containers:
@@ -24,7 +24,7 @@ spec:
           name: devsecops-container
           volumeMounts:
             - mountPath: /tmp
-              name: vol
+              name: logVolume
           securityContext:
             runAsNonRoot: true
             runAsUser: 100
