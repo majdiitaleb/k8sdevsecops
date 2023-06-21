@@ -127,7 +127,8 @@ pipeline {
          junit 'target/surefire-reports/*.xml'
          jacoco execPattern: 'target/jacoco.exec'
          pitmutation  mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
-        // dependencyCheckPublisher   pattern: 'target/dependency-check-report.xml'
+        dependencyCheckPublisher   pattern: 'target/dependency-check-report.xml'
+        publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'owasp-zap-report', reportFiles: 'zap_report.html', reportName: 'OWASP ZAP HTML Report', reportTitles: 'OWASP ZAP HTML Report', useWrapperFileDirectly: true])
           }
        }
 
