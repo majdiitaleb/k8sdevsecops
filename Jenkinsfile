@@ -6,7 +6,7 @@ pipeline {
     containerName = "devsecops-container"
     serviceName = "devsecops-svc"
     imageName = "majditaleb/numeric-app:${GIT_COMMIT}"
-    applicationURL="http://desecops-majdi.eastus.cloudapp.azure.com"
+    applicationURL="http://http://desecops-majdi.eastus.cloudapp.azure.com"
     applicationURI="/increment/99"
   }
   stages {
@@ -67,15 +67,8 @@ pipeline {
         }
           stage('Vulnerability Scan - Kubernetes') {
               steps {
-          //  sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
- parallel(
-          "OPA Scan": {
             sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
-         },
-          "Kubesec Scan": {
-             sh "bash kubesec-scan.sh"
-           }
- )
+
 
               //  "Trivy Scan": {
                 //   sh "bash trivy-k8s-scan.sh"
@@ -117,6 +110,14 @@ pipeline {
           }
         }
       }
+      
+    stage('OWASP ZAP - DAST') {
+      steps {
+        withKubeConfig([credentialsId: 'kubeconfig']) {
+          sh 'bash zap.sh'
+        }
+      }
+    }
     }
   }
     post {
