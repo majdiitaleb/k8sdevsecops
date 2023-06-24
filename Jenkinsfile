@@ -1,6 +1,7 @@
 pipeline {
   agent any
 
+
  environment {
     deploymentName = "devsecops"
     containerName = "devsecops-container"
@@ -11,9 +12,13 @@ pipeline {
   }
   stages {
       stage('Build Artifact') {
+
             steps {
-              sh "mvn clean package -DskipTests=true"
-              archive 'target/*.jar'
+            withMaven(maven: 'mvn'){
+            sh "mvn clean package -DskipTests=true"
+                          archive 'target/*.jar'
+            }
+
             }
         }
       stage('Units tests') {
