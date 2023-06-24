@@ -12,8 +12,9 @@ pipeline {
   }
   stages {
       stage('Build Artifact') {
+
             steps {
-            def mvnHome= tool name: 'Apache Maven 3.8.8', type: 'maven'
+            def mvnHome = tool name: 'Apache Maven 3.8.8', type: 'maven'
             sh "${mvnHome}/bin/mvn  clean package -DskipTests=true"
                           archive 'target/*.jar'
 
