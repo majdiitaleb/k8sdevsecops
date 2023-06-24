@@ -12,13 +12,12 @@ pipeline {
   }
   stages {
       stage('Build Artifact') {
-
             steps {
-            withMaven(maven: 'Apache Maven 3.8.8'){
-            sh "mvn clean package -DskipTests=true"
+            def mvnHome= tool name: 'Apache Maven 3.8.8', type: 'maven'
+            sh "${mvnHome}/bin/mvn  clean package -DskipTests=true"
                           archive 'target/*.jar'
-            }
-              
+
+
             }
         }
       stage('Units tests') {
