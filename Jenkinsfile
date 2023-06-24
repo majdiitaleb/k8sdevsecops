@@ -14,11 +14,11 @@ pipeline {
       stage('Build Artifact') {
 
             steps {
-            withMaven {
+            withMaven(maven: 'mvn'){
             sh "mvn clean package -DskipTests=true"
                           archive 'target/*.jar'
             }
-
+              
             }
         }
       stage('Units tests') {
