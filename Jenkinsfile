@@ -12,30 +12,35 @@ pipeline {
   }
   stages {
       stage('Build Artifact') {
-
             steps {
-            def mvnHome = tool name: 'Apache Maven 3.8.8', type: 'maven'
-            sh "${mvnHome}/bin/mvn  clean package -DskipTests=true"
+            withMaven(maven: 'Apache Maven 3.8.8'){
+            sh "mvn -B clean package -DskipTests=true"
                           archive 'target/*.jar'
-
+            }
 
             }
         }
       stage('Units tests') {
         steps {
-             sh "mvn test"
+         withMaven(maven: 'Apache Maven 3.8.8'){
+          sh "mvn test"
+         }
+
         }
       }
       stage('Mutation tests') {
          steps {
+         withMaven(maven: 'Apache Maven 3.8.8'){
                 sh "mvn org.pitest:pitest-maven:mutationCoverage"
+                }
          }
 
       }
        stage('sonarqube analysis') {
           steps {
                withSonarQubeEnv('SonarQube') {
-                  sh "mvn  sonar:sonar -Dsonar.projectKey=numeric-app"
+
+                  sh "${mvnHome}/bin/mvn  sonar:sonar -Dsonar.projectKey=numeric-app"
                }
                 timeout(time: 2, unit: 'MINUTES'){
                   script {
@@ -48,7 +53,7 @@ pipeline {
             steps {
             parallel(
             "dependency scan": {
-            sh "mvn dependency-check:check"
+            sh "${mvnHome}/bin/mvn dependency-check:check"
             },
             "Trivy scan":{
                 sh "bash trivy-docker-image-scan.sh"
