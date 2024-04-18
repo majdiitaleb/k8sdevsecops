@@ -33,7 +33,7 @@ pipeline {
                  steps {
                       withSonarQubeEnv('SonarQube') {
 
-                         sh "${mvnHome}/bin/mvn  sonar:sonar -Dsonar.projectKey=numeric-application"
+                         sh "mvn clean verify   sonar:sonar -Dsonar.projectKey=numeric-application"
                       }
                        timeout(time: 2, unit: 'MINUTES'){
                          script {
