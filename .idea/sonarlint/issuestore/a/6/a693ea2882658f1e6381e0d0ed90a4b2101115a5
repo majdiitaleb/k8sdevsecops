@@ -1,0 +1,14 @@
+
+b	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¡¢Õá
+L
+java:S2629."7Use the built-in formatting to construct this argument.(¥êV
+L
+java:S2629/"7Use the built-in formatting to construct this argument.(Ú+
+o	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(«ßêë
+]	java:S125"<This block of commented-out lines of code should be removed.(í‰ë—ùÿÿÿÿ8«¹Ñôî1
+Q
+java:S1854";Remove this useless assignment to local variable "message".(•›ë
+V
+java:S3457."AFormat specifiers should be used instead of string concatenation.(¥êV
+V
+java:S3457/"AFormat specifiers should be used instead of string concatenation.(Ú+
