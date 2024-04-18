@@ -28,7 +28,18 @@ pipeline {
 
         }
       }
+ stage('sonarqube analysis') {
+          steps {
 
+                  sh "mvn clean verify sonar:sonar \
+                        -Dsonar.projectKey=numeric-application \
+                        -Dsonar.projectName='numeric-application' \
+                        -Dsonar.host.url=http://devsecops-majdi.eastus.cloudapp.azure.com:9000 \
+                        -Dsonar.token=sqp_90421e855d2a444b6a597afd8bbd374ea8f58305"
+
+
+          }
+       }
 
 
 
