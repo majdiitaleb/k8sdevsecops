@@ -18,3 +18,5 @@ A
 k8s-deployment.sh,9\9\990285873c4985de1807358c90dd86eb2c5f890f
 K
 k8s_deployment_service.yaml,e\c\ec518ac069e404bbb9d8aed108c274ae42a0f350
+m
+=src/main/java/com/devsecops/SecurityWithCsrfCookieConfig.java,9\6\96b3916b634b68c6366ad2353e4cee8b88042478
