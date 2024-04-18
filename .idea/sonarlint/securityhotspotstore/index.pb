@@ -12,3 +12,9 @@ B
 :
 
 Dockerfile,6\6\6651ddff6eb82c840ced7c1dddee15c6e1913dd4
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+A
+k8s-deployment.sh,9\9\990285873c4985de1807358c90dd86eb2c5f890f
+K
+k8s_deployment_service.yaml,e\c\ec518ac069e404bbb9d8aed108c274ae42a0f350
