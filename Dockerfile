@@ -1,4 +1,4 @@
-FROM amazoncorretto:17.0.7-alpine
+FROM amazoncorretto:8u412-alpine3.18
 EXPOSE 8080
 ARG JAR_FILE=target/*.jar
 RUN addgroup -S pipeline && adduser -S k8s-pipeline -G pipeline
